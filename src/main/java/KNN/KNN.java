@@ -5,12 +5,13 @@ import java.io.FileReader;
 import java.util.*;
 
 /*
-*
-knn k临近算法
-思想：“物以群分”，预测某一个类别，看它邻居多属于哪一类，距离加权。
-距离函数：L2，cosine，皮尔逊相关系数、Jaccard相关系数
-加权表决：
-* */
+ *
+ *knn k临近算法
+ *思想：“物以群分”，预测某一个类别，看它邻居多属于哪一类，距离加权。
+ *距离函数：L2，cosine，皮尔逊相关系数、Jaccard相关系数
+ *加权表决：
+ * 任务：鸢尾花分类
+ */
 public class KNN {
 
     public static void main(String[] args) throws Exception{
@@ -150,6 +151,20 @@ public class KNN {
         splitedData[0]=train.toArray(new Node[train.size()]);
         splitedData[1]=test.toArray(new Node[test.size()]);
         return splitedData;
+    }
+    //节点系结构
+    static class Node implements  Comparable{
+        double[] properties;
+        String label;
+        double distance;
+        Node(double[] properties, String label) {
+            this.properties = properties;
+            this.label = label;
+        }
+        @Override
+        public int compareTo(Object e) {
+            return (int) (this.distance-((Node)e).distance);
+        }
     }
 
 }
